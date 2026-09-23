@@ -17,7 +17,6 @@
   --smoke:#9aa3b5;
   --paper:#f5efe4;
 }
-html{scroll-behavior:smooth}
 body{
   background:var(--ink);
   color:var(--paper);
@@ -62,16 +61,16 @@ nav .brand img{height:34px;vertical-align:middle;margin-right:.6rem}
 
 /* ============ NAV MINIMALISTA ============ */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:-90px;left:0;right:0;z-index:100;
   display:flex;justify-content:space-between;align-items:center;
   padding:1rem 4vw;
-  opacity:0;transform:translateY(-100%);
+  opacity:0;
   background:rgba(5,6,10,0);
   border-bottom:1px solid transparent;
-  transition:opacity .8s ease,transform .8s ease,background .5s ease,border-color .5s ease,padding .5s ease;
+  transition:opacity .8s ease,top .8s ease,background .5s ease,border-color .5s ease,padding .5s ease;
 }
 nav.visible{
-  opacity:1;transform:translateY(0);
+  opacity:1;top:0;
   background:#05060a;
   border-bottom:1px solid rgba(245,239,228,.08);
   box-shadow:0 6px 24px rgba(0,0,0,.45);
@@ -324,7 +323,7 @@ footer small{color:var(--smoke);font-weight:300;letter-spacing:1px}
 
 /* ============ MODO DÍA — paleta logo IMPM ============ */
 body.dia{background:#f2f8fc;color:#173d5e}
-body.dia ::selection{background:#2f8fd0;color:#fff}
+body.dia ::selection{background:#1a6ca8;color:#fff}
 body.dia #themeToggle{background:rgba(255,255,255,.8);border-color:rgba(18,58,92,.2);color:#123a5c}
 body.dia #glow{background:radial-gradient(circle,rgba(80,160,215,.13),transparent 65%)}
 
@@ -332,42 +331,43 @@ body.dia #glow{background:radial-gradient(circle,rgba(80,160,215,.13),transparen
 body.dia nav .brand{color:#0f3a63}
 body.dia nav .brand em{color:#3d8fc4}
 body.dia nav ul a{color:#123a5c}
-body.dia nav ul a::after{background:#2f8fd0}
+body.dia nav ul a::after{background:#1a6ca8}
 body.dia #navToggle{color:#123a5c}
-body.dia nav.visible{background:#ffffff;border-bottom:1px solid rgba(18,58,92,.1);box-shadow:0 6px 24px rgba(18,58,92,.1)}
+body.dia nav.visible{background:linear-gradient(180deg,#ffffff 0%,#e6f1f9 100%);border-bottom:1px solid rgba(26,108,168,.28);box-shadow:0 10px 34px rgba(26,108,168,.22)}
 body.dia nav ul.open{background:rgba(242,248,252,.98)}
 
 /* hero */
 body.dia #hero{background:linear-gradient(135deg,#e9f4fb 0%,#d6eaf6 55%,#c2e0f2 100%)}
-body.dia .hero-kicker{color:#2f8fd0}
+body.dia .hero-kicker{color:#1a6ca8}
 body.dia .hero-title{color:#0f3a63}
 body.dia .hero-title .fire{
-  background:linear-gradient(100deg,#0f3a63 10%,#2f8fd0 45%,#6bb7e3 75%,#a5d6f0 100%);
+  background:linear-gradient(100deg,#0f3a63 10%,#1a6ca8 45%,#6bb7e3 75%,#a5d6f0 100%);
   background-size:200% auto;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-body.dia .hero-sub{color:#4a6b85}
-body.dia .hero-verse{color:rgba(15,58,99,.55)}
-body.dia .scroll-hint{color:#4a6b85}
-body.dia .scroll-hint .line{background:linear-gradient(#2f8fd0,transparent)}
+body.dia .hero-sub{color:#26425c}
+body.dia .hero-verse{color:rgba(11,42,72,.85)}
+body.dia .scroll-hint{color:#26425c}
+body.dia .scroll-hint .line{background:linear-gradient(#1a6ca8,transparent)}
 
 /* versículo */
 body.dia #presencia{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(80,160,215,.12),transparent)}
-body.dia .sec-label{color:#2f8fd0}
-body.dia .sec-label::before{background:linear-gradient(90deg,transparent,#2f8fd0)}
+body.dia .sec-label{color:#1a6ca8}
+body.dia .sec-label::before{background:linear-gradient(90deg,transparent,#1a6ca8)}
 body.dia .big-verse{color:#123a5c}
-body.dia .big-verse .hl{color:#2f8fd0}
-body.dia .big-verse .w{opacity:.06}
-body.dia .big-verse .cite{color:#4a6b85}
+body.dia .big-verse .w.lit{opacity:1;filter:blur(0)}
+body.dia .big-verse .hl{color:#1a6ca8}
+body.dia .big-verse .w:not(.lit){opacity:.05}
+body.dia .big-verse .cite{color:#26425c}
 
 /* timeline */
 body.dia .timeline::before{background:linear-gradient(transparent,#3d8fc4 20%,#3d8fc4 80%,transparent);box-shadow:0 0 12px rgba(61,143,196,.5)}
 body.dia .tl-item::before{background:#f2f8fc;border-color:#3d8fc4;box-shadow:0 0 14px rgba(61,143,196,.7)}
 body.dia .tl-item h3{color:#0f3a63}
-body.dia .tl-item p{color:#4a6b85}
-body.dia .tl-item .dia{color:#2f8fd0}
-body.dia .tl-item .hora{border-color:rgba(47,143,208,.4);color:#2f8fd0}
+body.dia .tl-item p{color:#26425c}
+body.dia .tl-item .dia{color:#1a6ca8}
+body.dia .tl-item .hora{border-color:rgba(47,143,208,.4);color:#1a6ca8}
 
 /* ministerios */
 body.dia #ministerios{background:linear-gradient(180deg,transparent,rgba(80,160,215,.07),transparent)}
@@ -375,33 +375,33 @@ body.dia .min-card{background:rgba(255,255,255,.75);border-color:rgba(18,58,92,.
 body.dia .min-card::before{background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(80,160,215,.18),transparent 65%)}
 body.dia .min-card:hover{border-color:rgba(47,143,208,.45)}
 body.dia .min-card h3{color:#0f3a63}
-body.dia .min-card p{color:#4a6b85}
+body.dia .min-card p{color:#26425c}
 
 /* oración */
 body.dia .orb{background:radial-gradient(circle at 35% 35%,#eaf6fd,#6bb7e3 45%,#2f7fb8 80%);box-shadow:0 0 80px rgba(80,160,215,.45),0 0 160px rgba(80,160,215,.25),inset 0 0 60px rgba(255,255,255,.35)}
 body.dia .orb-ring{border-color:rgba(47,143,208,.35)}
 body.dia .orb-ring::before{background:#3d8fc4;box-shadow:0 0 12px #3d8fc4}
 body.dia #oracion h2{color:#0f3a63}
-body.dia #oracion p{color:#4a6b85}
+body.dia #oracion p{color:#26425c}
 body.dia .btn-glow{background:linear-gradient(100deg,#6bb7e3,#2f7fb8);color:#fff}
 body.dia .btn-glow:hover{box-shadow:0 10px 40px rgba(47,127,184,.4)}
 
 /* contacto */
 body.dia .contact-line{border-bottom-color:rgba(18,58,92,.12)}
-body.dia .contact-line h4{color:#2f8fd0}
+body.dia .contact-line h4{color:#1a6ca8}
 body.dia .contact-line p{color:#123a5c}
 body.dia .map-frame{
   background:
     linear-gradient(rgba(80,160,215,.08),rgba(80,160,215,.08)),
     repeating-linear-gradient(0deg,transparent 0 39px,rgba(18,58,92,.06) 39px 40px),
     repeating-linear-gradient(90deg,transparent 0 39px,rgba(18,58,92,.06) 39px 40px);
-  border-color:rgba(18,58,92,.12);color:#4a6b85;
+  border-color:rgba(18,58,92,.12);color:#26425c;
 }
 
 /* footer */
 body.dia footer{border-top-color:rgba(18,58,92,.1)}
 body.dia footer .f-verse{color:rgba(15,58,99,.6)}
-body.dia footer small{color:#4a6b85}
+body.dia footer small{color:#26425c}
 
 /* ============ RESPONSIVE ============ */
 @media(max-width:768px){
@@ -425,7 +425,7 @@ body.dia footer small{color:#4a6b85}
 <script>if(localStorage.getItem('impm-theme')==='dia')document.body.classList.add('dia');</script>
 
 <!-- BOTÓN DÍA/NOCHE -->
-<button id="themeToggle" aria-label="Cambiar entre modo día y noche">🌙</button>
+<button id="themeToggle" aria-label="Cambiar entre modo día y noche">☀️</button>
 
 <!-- PRELOADER -->
 <div id="preloader">
@@ -598,7 +598,31 @@ addEventListener('scroll',()=>{nav.classList.toggle('visible',scrollY>80)});
 /* ===== MENÚ MÓVIL ===== */
 const navToggle=document.getElementById('navToggle'),navMenu=document.getElementById('navMenu');
 navToggle.addEventListener('click',()=>navMenu.classList.toggle('open'));
-navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMenu.classList.remove('open')));
+
+/* ===== SCROLL SUAVE RÁPIDO A SECCIONES ===== */
+function smoothTo(targetY){
+  const startY=window.scrollY,diff=targetY-startY;
+  const dur=Math.min(400+Math.abs(diff)*.25,900); // rápido, según distancia
+  const t0=performance.now();
+  (function step(t){
+    const p=Math.min((t-t0)/dur,1);
+    const e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2; // suave acelerar/frenar
+    window.scrollTo(0,startY+diff*e);
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}
+document.querySelectorAll('#navMenu a, a.brand').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(!id||!id.charAt(0)==='#')return;
+    const el=document.querySelector(id);
+    if(!el)return;
+    e.preventDefault(); // nunca recarga la página
+    navMenu.classList.remove('open');
+    smoothTo(el.getBoundingClientRect().top+window.scrollY);
+    history.pushState(null,'',id);
+  });
+});
 
 /* ===== VERSÍCULO: palabras que se encienden al entrar ===== */
 const verse=document.getElementById('verse');
@@ -645,7 +669,7 @@ document.querySelectorAll('.min-card').forEach(card=>{
 const themeToggle=document.getElementById('themeToggle');
 function setTheme(dia){
   document.body.classList.toggle('dia',dia);
-  themeToggle.textContent=dia?'\u2600\uFE0F':'\uD83C\uDF19';
+  themeToggle.textContent=dia?'\uD83C\uDF19':'\u2600\uFE0F';
   localStorage.setItem('impm-theme',dia?'dia':'noche');
 }
 themeToggle.addEventListener('click',()=>setTheme(!document.body.classList.contains('dia')));
