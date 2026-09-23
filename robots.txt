@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-# TODO: reemplazar por el dominio final
-Sitemap: https://www.impmchile.cl/sitemap.xml
+Sitemap: https://fhollken.github.io/impm/sitemap.xml
