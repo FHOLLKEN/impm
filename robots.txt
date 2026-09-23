@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# TODO: reemplazar por el dominio final
+Sitemap: https://www.impmchile.cl/sitemap.xml
