@@ -50,8 +50,10 @@
   "telephone": "+56 9 0000 0000",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Calle Ejemplo 123",
-    "addressLocality": "Ciudad",
+    "streetAddress": "Angelmó 2361",
+    "addressLocality": "Renca",
+    "addressRegion": "Región Metropolitana",
+    "postalCode": "8640173",
     "addressCountry": "CL"
   },
   "openingHours": ["We 19:30-21:30","Fr 21:00-23:00","Sa 20:00-22:00","Su 11:00-13:00"]
@@ -323,8 +325,7 @@ section{position:relative;z-index:1;padding:16vh 6vw}
     repeating-linear-gradient(0deg,transparent 0 39px,rgba(245,239,228,.05) 39px 40px),
     repeating-linear-gradient(90deg,transparent 0 39px,rgba(245,239,228,.05) 39px 40px);
   border:1px solid rgba(245,239,228,.1);
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  color:var(--smoke);font-style:italic;padding:2rem;
+  padding:0;overflow:hidden;
 }
 
 /* ============ FOOTER ============ */
@@ -447,7 +448,8 @@ body.dia .map-frame{
     linear-gradient(rgba(80,160,215,.08),rgba(80,160,215,.08)),
     repeating-linear-gradient(0deg,transparent 0 39px,rgba(18,58,92,.06) 39px 40px),
     repeating-linear-gradient(90deg,transparent 0 39px,rgba(18,58,92,.06) 39px 40px);
-  border-color:rgba(18,58,92,.12);color:#26425c;
+  border-color:rgba(18,58,92,.12);
+  padding:0;overflow:hidden;
 }
 
 /* footer */
@@ -607,12 +609,16 @@ body.dia .rrss svg{fill:#123a5c}
   <div class="sec-label">Visítanos</div>
   <div class="contact-split">
     <div>
-      <div class="contact-line"><span class="ci">📍</span><div><h4>Dirección</h4><p>Calle Ejemplo 123, Centro, Ciudad</p></div></div>
+      <div class="contact-line"><span class="ci">📍</span><div><h4>Dirección</h4><p>Angelmó 2361, Renca, Región Metropolitana</p></div></div>
       <div class="contact-line"><span class="ci">📞</span><div><h4>Teléfono</h4><p>+56 9 0000 0000</p></div></div>
       <div class="contact-line"><span class="ci">✉️</span><div><h4>Correo</h4><p>contacto@montedesion.cl</p></div></div>
       <div class="contact-line"><span class="ci">🕐</span><div><h4>Oficina</h4><p>Martes a Sábado · 10:00 – 18:00</p></div></div>
     </div>
-    <div class="map-frame">[ Espacio reservado para el mapa de Google Maps ]</div>
+    <div class="map-frame"><iframe
+      src="https://maps.google.com/maps?q=Angelm%C3%B3%202361%2C%20Renca%2C%20Regi%C3%B3n%20Metropolitana&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      width="100%" height="100%" style="border:0;min-height:380px;display:block"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Mapa: IMPM Chile, Angelmó 2361, Renca" allowfullscreen></iframe></div>
   </div>
 </section>
 

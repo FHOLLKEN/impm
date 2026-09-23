@@ -1,0 +1,66 @@
+recucuerda que estamos en modo boceto, quiero entregar visualmente todo perfecto para cuando empecemos a editar con datos reales y dominio real
+
+de paso agregemos direccion real para el mapa
+
+Angelmó 2361, 8640173 Renca, Región Metropolitana
+
+
+
+PROYECTO: WEB "IMPM CHILE" — Templo Pentecostal (versión 1.4)
+KEYWORD DE RETOMO: IMPM-CHILE
+
+SITIO EN VIVO: https://fhollken.github.io/impm/ (GitHub Pages del usuario fhollken)
+ARCHIVOS LOCALES: /mnt/agents/output/templo-impm-chile/ (carpeta) y 
+/mnt/agents/output/templo-impm-chile.zip (ambos contienen los 5 archivos:
+index.html, sw.js, robots.txt, sitemap.xml, og-image.jpg — deben subirse 
+JUNTOS y en la MISMA CARPETA del repositorio)
+
+PALETA: Modo noche = negro #05060a + dorado #e8c766 + naranja brasa #ff6b1a.
+Modo día = blanco/celeste/azul tomado del logo oficial (textos #123a5c, 
+acentos #1a6ca8). NO usar otros colores sin confirmación del usuario.
+
+DISEÑO (aprobado, NO rehacer): estilo dark experimental, NADA de plantillas
+clásicas. Incluye: partículas de brasas en canvas (ocultas en modo día), 
+preloader con logo IMPM (al abrir la web), versículo gigante que se enciende
+palabra por palabra al hacer scroll, línea de tiempo luminosa de cultos,
+tarjetas de ministerios con efecto tilt 3D, orbe de fuego flotante en la
+sección de oración, barra de navegación NEGRA que aparece solo al hacer 
+scroll (no está fija al inicio; animada con propiedad "top", NUNCA transform,
+porque transform rompe el menú móvil). Navegación con scroll suave propio en
+JS con preventDefault (sin recargas de página). Nombre oficial: "IMPM Chile"
+(NUNCA "Monte de Sión", era nombre anterior). Logo oficial incrustado en 
+base64 dentro del index.html (archivo único, sin imágenes externas para 
+logo/favicon/manifest PWA).
+
+TOGGLE DÍA/NOCHE: botón fijo arriba-derecha, siempre visible. Muestra el 
+icono DESTINO: ☀️ en modo noche, 🌙 en modo día. Guarda preferencia en 
+localStorage bajo la clave 'impm-theme'. En modo día: partículas ocultas, 
+alto contraste, barra superior con degradado celeste.
+
+SEO/PWA COMPLETO: meta description (158 caracteres), Open Graph + Twitter 
+Cards, og-image.jpg (1200×630 creado con el logo), JSON-LD tipo Church, 
+robots.txt, sitemap.xml, PWA instalable (manifest en base64 + sw.js offline),
+botón "volver arriba", iconos de Facebook/Instagram/YouTube en el footer.
+El warning "fb:app_id" del depurador de Meta es OPCIONAL, no afecta nada.
+
+ESTADO OG:IMAGE: verificado funcionando en el depurador de Meta. WhatsApp e
+Instagram aún no muestran la imagen por caché viejo (el usuario compartió
+antes de subirla). Soluciones ya indicadas: compartir con ?v=2 al final de la
+URL, esperar propagación del caché (días), o probar desde teléfono de otra
+persona. NO es un error del código.
+
+PENDIENTE (el usuario entregará datos reales después, es web boceto):
+1. Dirección real (hoy "Calle Ejemplo 123" — en contacto y JSON-LD)
+2. Teléfono/WhatsApp real (hoy +56 9 0000 0000 — en contacto, botones 
+   flotantes y JSON-LD)
+3. Año real de fundación (hoy "Desde 1998" en el hero, inventado)
+4. URLs reales de RRSS (hoy placeholders facebook.com/IMPMChile etc., 
+   marcados con TODO en el footer)
+5. Mapa de Google Maps real (hoy es recuadro de texto)
+6. Si consiguen dominio propio: actualizar og:url, og:image, JSON-LD url, 
+   sitemap.xml y robots.txt (ahora apuntan a fhollken.github.io/impm/)
+
+REGLAS DEL USUARIO (fhollken): usa español neutro/chileno, NUNCA voseo ni
+jerga argentina. Prefiere que le muestres informes antes de aplicar cambios
+importantes, y confirmar cambios visuales antes de ejecutarlos. No tocar lo 
+visual sin aprobación. Verificar todo con pruebas antes de entregar.
