@@ -20,61 +20,89 @@ agregar tiktok https://www.tiktok.com/@impmchile
 donde dice OFICINA cambiarla por Agenda tu cita.
 
 
-PROYECTO: WEB "IMPM CHILE" — Templo Pentecostal (versión 1.4)
+PROYECTO: WEB "IMPM CHILE" — Iglesia pentecostal
 KEYWORD DE RETOMO: IMPM-CHILE
 
-SITIO EN VIVO: https://fhollken.github.io/impm/ (GitHub Pages del usuario fhollken)
-ARCHIVOS LOCALES: /mnt/agents/output/templo-impm-chile/ (carpeta) y 
-/mnt/agents/output/templo-impm-chile.zip (ambos contienen los 5 archivos:
-index.html, sw.js, robots.txt, sitemap.xml, og-image.jpg — deben subirse 
-JUNTOS y en la MISMA CARPETA del repositorio)
+═══════════════════════════════════════════
+ESTADO ACTUAL: v1.7 — WEB COMPLETA Y EN VIVO
+═══════════════════════════════════════════
+URL en vivo: https://fhollken.github.io/impm/ (GitHub Pages, repo github.com/fhollken/impm)
+Archivos fuente: /mnt/agents/output/templo-impm-chile/ (carpeta de trabajo)
+Entregas: /mnt/agents/output/impm-chile-v1.X.zip (cada versión lleva su número en el NOMBRE del zip)
 
-PALETA: Modo noche = negro #05060a + dorado #e8c766 + naranja brasa #ff6b1a.
-Modo día = blanco/celeste/azul tomado del logo oficial (textos #123a5c, 
-acentos #1a6ca8). NO usar otros colores sin confirmación del usuario.
+CONTROL DE VERSIONES (acordado con el usuario):
+Versión actual v1.7. Próximas: v1.8, v1.9... Saltar a 2.0 SOLO cuando el usuario lo confirme.
+Historial: v1.0 lanzamiento → v1.1 logo/navbar → v1.2 día/noche → v1.3 SEO/PWA → v1.4 dirección+mapa
+→ v1.5 fix og:url → v1.6 datos reales footer/correo/tel/TikTok → v1.7 mensajes automáticos WhatsApp.
 
-DISEÑO (aprobado, NO rehacer): estilo dark experimental, NADA de plantillas
-clásicas. Incluye: partículas de brasas en canvas (ocultas en modo día), 
-preloader con logo IMPM (al abrir la web), versículo gigante que se enciende
-palabra por palabra al hacer scroll, línea de tiempo luminosa de cultos,
-tarjetas de ministerios con efecto tilt 3D, orbe de fuego flotante en la
-sección de oración, barra de navegación NEGRA que aparece solo al hacer 
-scroll (no está fija al inicio; animada con propiedad "top", NUNCA transform,
-porque transform rompe el menú móvil). Navegación con scroll suave propio en
-JS con preventDefault (sin recargas de página). Nombre oficial: "IMPM Chile"
-(NUNCA "Monte de Sión", era nombre anterior). Logo oficial incrustado en 
-base64 dentro del index.html (archivo único, sin imágenes externas para 
-logo/favicon/manifest PWA).
+═══════════════════════════════════════════
+ESTRUCTURA TÉCNICA (NO REDISEÑAR — aprobada)
+═══════════════════════════════════════════
+• Archivo único autocontenido: logo oficial, favicon (emblema paloma 64px), apple-touch-icon
+  (180px) y manifest PWA van incrustados en BASE64 dentro del index.html. Sin imágenes externas.
+• Diseño dark experimental (NADA de plantilla clásica): partículas de brasas en canvas
+  (canvas #embers, se ocultan en modo día), preloader con logo, versículo gigante que se
+  enciende palabra por palabra (spans .w + .lit con IntersectionObserver), línea de tiempo
+  luminosa de cultos, tarjetas de ministerios con tilt 3D, orbe de fuego en sección oración.
+• Navbar NEGRA aparece solo al hacer scroll (nunca fija al inicio). Animada con propiedad
+  "top" NUNCA "transform" — un transform en la barra rompe el menú móvil (containing block).
+• Navegación: scroll suave JS propio (función smoothTo) con preventDefault en enlaces
+  #navMenu a y a.brand. Sin recargas.
+• Toggle día/noche: botón fijo #themeToggle arriba-derecha, siempre visible. Muestra el
+  icono DESTINO: ☀️ en noche, 🌙 en día. Clase body.dia. localStorage clave 'impm-theme'.
+  Modo día = blanco/celeste/azul (textos #123a5c, acentos #1a6ca8), barra degradado celeste,
+  versículo día usa .w:not(.lit). Tema guardado se aplica con script inline justo tras <body>.
+• Service worker sw.js v2 = ESTRATEGIA NETWORK-FIRST (red primera, caché solo offline).
+  Borra cachés viejas en activate. Crítico: así el usuario ve sus propios cambios sin trucos.
+  Al probar local (file://) el SW no se registra (guard por protocolo http).
+• ZIP siempre con 5 archivos: index.html, sw.js, robots.txt, sitemap.xml, og-image.jpg.
+  Deben subirse JUNTOS a la raíz del repo.
+• Paleta noche: negro #05060a, dorado #e8c766, brasa #ff6b1a. Fuentes: Cormorant Garamond
+  (títulos) + Inter (texto) vía Google Fonts CDN.
 
-TOGGLE DÍA/NOCHE: botón fijo arriba-derecha, siempre visible. Muestra el 
-icono DESTINO: ☀️ en modo noche, 🌙 en modo día. Guarda preferencia en 
-localStorage bajo la clave 'impm-theme'. En modo día: partículas ocultas, 
-alto contraste, barra superior con degradado celeste.
+═══════════════════════════════════════════
+DATOS REALES YA INTEGRADOS
+═══════════════════════════════════════════
+• Nombre: IMPM Chile (NUNCA "Monte de Sión" — nombre anterior prohibido)
+• Dirección: Angelmó 2361, Renca, Región Metropolitana (8640173) + mapa Google embebido (iframe)
+• Tel/WhatsApp: +56 9 8846 1783 (wa.me/56988461783) — en contacto, JSON-LD, y 3 botones:
+  flotante ("Hola, vengo de la web de IMPM Chile 🙏"), "Pedir oración" ("necesito oración"),
+  "Agenda tu cita" (reemplazó a "Oficina", enlace WA)
+• Correo: contacto.impm@gmail.com (reemplazó contacto@montedesion.cl — dominio viejo prohibido)
+• RRSS footer: Facebook facebook.com/IMPMChile (placeholder), Instagram instagram.com/impm_chile
+  (REAL), YouTube @IMPMChile (placeholder), TikTok tiktok.com/@impmchile (REAL)
+• Footer: "© 2026 IMPM Chile" + línea "Web powered by fhollken" con link a
+  https://fhollken.github.io/pcgaming/
+• Cultos: Lunes "Hombres a Imagen de Dios" 20:00 · Jueves "Un Espacio Entre Nosotras" 20:00 ·
+  Viernes "Hacedores de Discípulos" 20:00 · Domingo "Culto" 11:00 (insignias .hora estilo cápsula)
+• Hero: kicker "Una comunidad que vive a Cristo" · título "Donde el fuego no se apaga" ·
+  párrafo largo con énfasis <em>dorado "donde el fuego no se apaga"</em> (azul #1a6ca8 en día) ·
+  versículo "Permaneced en mí, y yo en vosotros." Juan 15:4
+• Versículo gigante: Hechos 1:8. Versículo footer: Salmos 23:1.
+• SEO/PWA completo: title, description (158 caracteres), robots, OG/Twitter,
+  og-image.jpg 1200×630 en raíz, JSON-LD Church con dirección y horarios reales,
+  manifest PWA, botón volver arriba #toTop.
 
-SEO/PWA COMPLETO: meta description (158 caracteres), Open Graph + Twitter 
-Cards, og-image.jpg (1200×630 creado con el logo), JSON-LD tipo Church, 
-robots.txt, sitemap.xml, PWA instalable (manifest en base64 + sw.js offline),
-botón "volver arriba", iconos de Facebook/Instagram/YouTube en el footer.
-El warning "fb:app_id" del depurador de Meta es OPCIONAL, no afecta nada.
+LECCIÓN APRENDIDA (crítica): la etiqueta og:url HACE QUE WhatsApp canibalice los ?v=N hacia
+la URL base envenenada en caché. Por eso og:url fue ELIMINADO a propósito del index.html.
+Estado: verificado con simulación del crawler facebookexternalhit que página e imagen se
+sirven perfecto. WhatsApp aún puede mostrar caché vieja en el teléfono del usuario — probar
+con ?v=9 o desde teléfono de tercero. Instagram NO genera previews (normal, nunca lo hace).
 
-ESTADO OG:IMAGE: verificado funcionando en el depurador de Meta. WhatsApp e
-Instagram aún no muestran la imagen por caché viejo (el usuario compartió
-antes de subirla). Soluciones ya indicadas: compartir con ?v=2 al final de la
-URL, esperar propagación del caché (días), o probar desde teléfono de otra
-persona. NO es un error del código.
+═══════════════════════════════════════════
+PENDIENTE / PRÓXIMOS PASOS
+═══════════════════════════════════════════
+1. Textos sección 4 MINISTERIOS (edición en curso — usuario entregará textos reales tarjeta por tarjeta)
+2. Luego secciones 5 Oración, 6 Contacto (horarios?), 7 Footer (versículo)
+3. Año real de fundación (hero decía "Desde 1998" inventado, ya fue reemplazado, pero año real pendiente)
+4. URL real de Facebook y YouTube (placeholders)
+5. Mejoras VISUALES — el usuario quiere explorar mejoras visuales una vez terminados los textos
+6. Confirmar imagen en WhatsApp (caché)
 
-PENDIENTE (el usuario entregará datos reales después, es web boceto):
-1. Dirección real (hoy "Calle Ejemplo 123" — en contacto y JSON-LD)
-2. Teléfono/WhatsApp real (hoy +56 9 0000 0000 — en contacto, botones 
-   flotantes y JSON-LD)
-3. Año real de fundación (hoy "Desde 1998" en el hero, inventado)
-4. URLs reales de RRSS (hoy placeholders facebook.com/IMPMChile etc., 
-   marcados con TODO en el footer)
-5. Mapa de Google Maps real (hoy es recuadro de texto)
-6. Si consiguen dominio propio: actualizar og:url, og:image, JSON-LD url, 
-   sitemap.xml y robots.txt (ahora apuntan a fhollken.github.io/impm/)
-
-REGLAS DEL USUARIO (fhollken): usa español neutro/chileno, NUNCA voseo ni
-jerga argentina. Prefiere que le muestres informes antes de aplicar cambios
-importantes, y confirmar cambios visuales antes de ejecutarlos. No tocar lo 
-visual sin aprobación. Verificar todo con pruebas antes de entregar.
+REGLAS DE TRABAJO CON ESTE USUARIO:
+• Español neutro/chileno. PROHIBIDO voseo y jerga argentina (dale, che, tenés, etc.)
+• La estructura/diseño está CONGELADA — solo editar textos con datos reales, cambios quirúrgicos
+• Antes de entregar: verificación exhaustiva (Playwright headless: errores JS, ambos temas,
+  móvil/desktop, checks de contenido). Evitar microfix que alargan el proceso.
+• Cada entrega de ZIP anuncia su número de versión en el nombre del archivo y en la respuesta
+• Si el chat muere: el usuario pegará este contexto completo
