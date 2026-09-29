@@ -490,6 +490,47 @@ body.dia .rrss svg{fill:#123a5c}
 .mini-footer-logo{width:105px;margin:0 auto .9rem;display:block;filter:drop-shadow(0 0 14px rgba(104,171,202,.4))}
 body.dia .mini-footer-logo{filter:drop-shadow(0 4px 12px rgba(18,58,92,.25))}
 
+
+/* ═══ V2.0 — Ministerios como galerías ═══ */
+.min-card{cursor:pointer}
+.min-card .gal-hint{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;
+  font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);opacity:.75;transition:opacity .3s;
+}
+.min-card:hover .gal-hint{opacity:1}
+body.dia .min-card .gal-hint{color:#1a6ca8}
+
+.ov-gal{position:fixed;inset:0;z-index:600;background:rgba(5,6,10,.98);
+  opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;overflow-y:auto;padding:5rem 6vw 4rem}
+.ov-gal.open{opacity:1;visibility:visible}
+body.dia .ov-gal{background:rgba(242,248,252,.99)}
+.ov-gal-head{text-align:center;margin-bottom:2.5rem}
+.ov-gal-head h2{font-size:clamp(1.9rem,5vw,2.8rem);color:var(--paper)}
+.ov-gal-head p{color:var(--smoke);margin-top:.4rem}
+body.dia .ov-gal-head h2{color:#0f3a63} body.dia .ov-gal-head p{color:#26425c}
+.ov-close{position:fixed;top:1.2rem;right:1.4rem;z-index:601;width:46px;height:46px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.08);border:1px solid rgba(232,199,102,.5);color:var(--gold);font-size:1.3rem;transition:all .3s}
+.ov-close:hover{background:var(--gold);color:var(--ink);transform:rotate(90deg)}
+
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;max-width:1100px;margin:0 auto}
+.gal-item{
+  position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#232c44,#161d31);border:1px solid rgba(245,239,228,.1);
+  transition:transform .3s;
+}
+.gal-item:hover{transform:scale(1.03)}
+body.dia .gal-item{background:linear-gradient(135deg,#e3edf5,#d3e3f0);border-color:rgba(18,58,92,.12)}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-item .ph-tag{font-size:2.6rem;opacity:.3;pointer-events:none}
+.gal-item.ph-empty{cursor:default}
+.gal-item.ph-empty:hover{transform:none}
+
+.lightbox2{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:4vw}
+.lightbox2.open{display:flex}
+.lb2-inner{max-width:92vw;max-height:88vh}
+.lb2-inner img{width:100%;height:100%;max-height:88vh;object-fit:contain;border-radius:12px}
+
 /* ============ RESPONSIVE ============ */
 @media(max-width:768px){
   nav ul{
@@ -592,12 +633,12 @@ body.dia .mini-footer-logo{filter:drop-shadow(0 4px 12px rgba(18,58,92,.25))}
 <section id="ministerios">
   <div class="sec-label">Sirviendo</div>
   <div class="min-grid">
-    <div class="min-card"><span class="icono">🎶</span><h3>Alabanza</h3><p>Músicos y cantores que ministran, no que performan.</p></div>
-    <div class="min-card"><span class="icono">🧒</span><h3>Infantil</h3><p>Los más pequeños conocen a Jesús con alegría y seguridad.</p></div>
-    <div class="min-card"><span class="icono">🌍</span><h3>Misiones</h3><p>Apoyamos obreros que llevan el Evangelio a otras naciones.</p></div>
-    <div class="min-card"><span class="icono">🤝</span><h3>Visitación</h3><p>Hospitales, cárceles y hogares: llevamos presencia. Expresamos la vida espiritual.</p></div>
-    <div class="min-card"><span class="icono">📚</span><h3>Estudio Bíblico</h3><p>Formación doctrinal para creyentes que quieren raíces.</p></div>
-    <div class="min-card"><span class="icono">🍞</span><h3>Ayuda Social</h3><p>Alimentos y apoyo real para familias de nuestra comuna.</p></div>
+    <div class="min-card" onclick="openGal('alabanza')" role="button" tabindex="0"><span class="icono">🎶</span><h3>Alabanza</h3><p>Músicos y cantores que ministran, no que performan.</p><span class="gal-hint">📷 Ver fotos</span></div>
+    <div class="min-card" onclick="openGal('infantil')" role="button" tabindex="0"><span class="icono">🧒</span><h3>Infantil</h3><p>Los más pequeños conocen a Jesús con alegría y seguridad.</p><span class="gal-hint">📷 Ver fotos</span></div>
+    <div class="min-card" onclick="openGal('misiones')" role="button" tabindex="0"><span class="icono">🌍</span><h3>Misiones</h3><p>Apoyamos obreros que llevan el Evangelio a otras naciones.</p><span class="gal-hint">📷 Ver fotos</span></div>
+    <div class="min-card" onclick="openGal('visitacion')" role="button" tabindex="0"><span class="icono">🤝</span><h3>Visitación</h3><p>Hospitales, cárceles y hogares: llevamos presencia. Expresamos la vida espiritual.</p><span class="gal-hint">📷 Ver fotos</span></div>
+    <div class="min-card" onclick="openGal('estudio')" role="button" tabindex="0"><span class="icono">📚</span><h3>Estudio Bíblico</h3><p>Formación doctrinal para creyentes que quieren raíces.</p><span class="gal-hint">📷 Ver fotos</span></div>
+    <div class="min-card" onclick="openGal('ayuda')" role="button" tabindex="0"><span class="icono">🍞</span><h3>Ayuda Social</h3><p>Alimentos y apoyo real para familias de nuestra comuna.</p><span class="gal-hint">📷 Ver fotos</span></div>
   </div>
 </section>
 
@@ -644,6 +685,22 @@ body.dia .mini-footer-logo{filter:drop-shadow(0 4px 12px rgba(18,58,92,.25))}
   <small>© 2026 IMPM Chile</small>
   <p class="powered">Web powered by <a href="https://fhollken.github.io/pcgaming/" target="_blank" rel="noopener">fhollken</a></p>
 </footer>
+
+<!-- ═══ V2.0: OVERLAY GALERÍA MINISTERIO ═══ -->
+<div class="ov-gal" id="ovGal" role="dialog">
+  <button class="ov-close" onclick="closeGal()" aria-label="Cerrar">✕</button>
+  <div class="ov-gal-head">
+    <h2 class="serif" id="galTitulo">Ministerio</h2>
+    <p id="galSub"></p>
+  </div>
+  <div class="gal-grid" id="galGrid"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox2" id="lb2" onclick="closeLb2()">
+  <button class="ov-close" onclick="closeLb2()" aria-label="Cerrar" style="position:absolute">✕</button>
+  <div class="lb2-inner" id="lb2Inner"></div>
+</div>
 
 <a id="wa" href="https://wa.me/56988461783?text=Hola%2C%20vengo%20de%20la%20web%20de%20IMPM%20Chile%20%F0%9F%99%8F" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32"><path d="M16 2.9C8.8 2.9 2.9 8.8 2.9 16c0 2.3.6 4.6 1.8 6.5L2.8 29.1l6.8-1.8c1.9 1 4 1.6 6.3 1.6 7.2 0 13.1-5.9 13.1-13.1S23.2 2.9 16 2.9zm0 23.9c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1.1 1.1-3.9-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.1 10 10 5.1 16 5.1S26.9 10 26.9 16 22 26.8 16 26.8zm5.8-9.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5z"/></svg>
@@ -781,6 +838,43 @@ function setTheme(dia){
 }
 themeToggle.addEventListener('click',()=>setTheme(!document.body.classList.contains('dia')));
 setTheme(localStorage.getItem('impm-theme')==='dia');
+/* ═══ V2.0 — Galerías por ministerio (10 fotos c/u, prefijo.nnn.jpg) ═══ */
+const GALERIAS={
+ alabanza:{titulo:'Alabanza',sub:'Momentos de adoración y música',prefijo:'ala',emoji:'🎶'},
+ infantil:{titulo:'Ministerio Infantil',sub:'Los pequeños de la casa de Dios',prefijo:'inf',emoji:'🧒'},
+ misiones:{titulo:'Misiones',sub:'Llevando el Evangelio a otras naciones',prefijo:'mis',emoji:'🌍'},
+ visitacion:{titulo:'Visitación',sub:'Presencia donde más se necesita',prefijo:'vis',emoji:'🤝'},
+ estudio:{titulo:'Estudio Bíblico',sub:'Creciendo en la Palabra',prefijo:'est',emoji:'📚'},
+ ayuda:{titulo:'Ayuda Social',sub:'Apoyo real para nuestra comuna',prefijo:'ayu',emoji:'🍞'}
+};
+function openGal(key){
+ const g=GALERIAS[key];if(!g)return;
+ document.getElementById('galTitulo').textContent=g.titulo;
+ document.getElementById('galSub').textContent=g.sub;
+ const grid=document.getElementById('galGrid');grid.innerHTML='';
+ for(let i=1;i<=10;i++){
+  const n=String(i).padStart(3,'0');
+  const d=document.createElement('div');d.className='gal-item';
+  const img=document.createElement('img');
+  img.src=g.prefijo+'.'+n+'.jpg';img.alt=g.titulo+' — foto '+n;img.loading='lazy';
+  img.onerror=function(){d.classList.add('ph-empty');this.remove()};
+  d.appendChild(img);
+  const tag=document.createElement('span');tag.className='ph-tag';tag.textContent=g.emoji;
+  d.appendChild(tag);
+  d.onclick=function(){
+    const im=this.querySelector('img');
+    if(!im)return;
+    const lb=document.getElementById('lb2Inner');lb.innerHTML='';
+    const big=document.createElement('img');big.src=im.src;big.alt=im.alt;
+    lb.appendChild(big);document.getElementById('lb2').classList.add('open');
+  };
+  grid.appendChild(d);
+ }
+ document.getElementById('ovGal').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeGal(){document.getElementById('ovGal').classList.remove('open');document.body.style.overflow=''}
+function closeLb2(){document.getElementById('lb2').classList.remove('open')}
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeGal();closeLb2()}});
 
 /* ===== VOLVER ARRIBA ===== */
 const toTop=document.getElementById('toTop');

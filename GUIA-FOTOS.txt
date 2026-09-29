@@ -1,0 +1,36 @@
+GUÍA DE IMÁGENES — IMPM CHILE v2.0
+═══════════════════════════════════════════
+
+Sube las fotos a la RAÍZ del repositorio (junto al index.html)
+con EXACTAMENTE estos nombres. Cada galería tiene 10 casillas;
+las que no subas aún se ven como recuadros con ícono ("pronto").
+
+🎶 ALABANZA
+   ala.001.jpg  ala.002.jpg  ala.003.jpg  ala.004.jpg  ala.005.jpg
+   ala.006.jpg  ala.007.jpg  ala.008.jpg  ala.009.jpg  ala.010.jpg
+
+🧒 INFANTIL
+   inf.001.jpg  inf.002.jpg  inf.003.jpg  inf.004.jpg  inf.005.jpg
+   inf.006.jpg  inf.007.jpg  inf.008.jpg  inf.009.jpg  inf.010.jpg
+
+🌍 MISIONES
+   mis.001.jpg  mis.002.jpg  mis.003.jpg  mis.004.jpg  mis.005.jpg
+   mis.006.jpg  mis.007.jpg  mis.008.jpg  mis.009.jpg  mis.010.jpg
+
+🤝 VISITACIÓN
+   vis.001.jpg  vis.002.jpg  vis.003.jpg  vis.004.jpg  vis.005.jpg
+   vis.006.jpg  vis.007.jpg  vis.008.jpg  vis.009.jpg  vis.010.jpg
+
+📚 ESTUDIO BÍBLICO
+   est.001.jpg  est.002.jpg  est.003.jpg  est.004.jpg  est.005.jpg
+   est.006.jpg  est.007.jpg  est.008.jpg  est.009.jpg  est.010.jpg
+
+🍞 AYUDA SOCIAL
+   ayu.001.jpg  ayu.002.jpg  ayu.003.jpg  ayu.004.jpg  ayu.005.jpg
+   ayu.006.jpg  ayu.007.jpg  ayu.008.jpg  ayu.009.jpg  ayu.010.jpg
+
+REGLAS:
+• Todo en MINÚSCULAS, sin espacios ni tildes (tal cual está arriba)
+• Formato .jpg (si tu foto es .png renómbrala a .jpg)
+• Número siempre de 3 dígitos: 001, 002 ... 010
+• Las fotos se acomodan solas al abrir cada galería
