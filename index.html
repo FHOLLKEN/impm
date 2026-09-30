@@ -512,24 +512,32 @@ body.dia .ov-gal-head h2{color:#0f3a63} body.dia .ov-gal-head p{color:#26425c}
 .ov-close{position:fixed;top:1.2rem;right:1.4rem;z-index:601;width:46px;height:46px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.08);border:1px solid rgba(232,199,102,.5);color:var(--gold);font-size:1.3rem;transition:all .3s}
 .ov-close:hover{background:var(--gold);color:var(--ink);transform:rotate(90deg)}
 
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;max-width:1100px;margin:0 auto}
+
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem;max-width:1100px;margin:0 auto}
 .gal-item{
   position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#232c44,#161d31);border:1px solid rgba(245,239,228,.1);
-  transition:transform .3s;
+  box-shadow:0 10px 28px rgba(0,0,0,.5);transition:transform .3s,box-shadow .3s;
 }
-.gal-item:hover{transform:scale(1.03)}
-body.dia .gal-item{background:linear-gradient(135deg,#e3edf5,#d3e3f0);border-color:rgba(18,58,92,.12)}
+.gal-item:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.65)}
+body.dia .gal-item{box-shadow:0 10px 28px rgba(18,58,92,.2)}
+body.dia .gal-item:hover{box-shadow:0 16px 40px rgba(18,58,92,.3)}
 .gal-item img{width:100%;height:100%;object-fit:cover;display:block}
-.gal-item .ph-tag{font-size:2.6rem;opacity:.3;pointer-events:none}
-.gal-item.ph-empty{cursor:default}
-.gal-item.ph-empty:hover{transform:none}
 
-.lightbox2{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:4vw}
+.lightbox2{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:4vw;cursor:zoom-out}
 .lightbox2.open{display:flex}
-.lb2-inner{max-width:92vw;max-height:88vh}
-.lb2-inner img{width:100%;height:100%;max-height:88vh;object-fit:contain;border-radius:12px}
+.lb2-inner{max-width:92vw;max-height:86vh;cursor:default}
+.lb2-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 70px rgba(0,0,0,.6)}
+.lb2-count{position:absolute;top:1.4rem;left:50%;transform:translateX(-50%);color:rgba(245,239,228,.75);font-size:.85rem;letter-spacing:2px}
+.lb2-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid rgba(232,199,102,.45);
+  color:var(--gold);font-size:1.4rem;display:flex;align-items:center;justify-content:center;
+  transition:background .3s,color .3s;z-index:2;user-select:none;
+}
+.lb2-arrow:hover{background:var(--gold);color:var(--ink)}
+.lb2-prev{left:1.4rem}.lb2-next{right:1.4rem}
+@media(max-width:640px){.lb2-arrow{width:44px;height:44px}.lb2-prev{left:.6rem}.lb2-next{right:.6rem}}
 
 /* ============ RESPONSIVE ============ */
 @media(max-width:768px){
@@ -697,9 +705,12 @@ body.dia .gal-item{background:linear-gradient(135deg,#e3edf5,#d3e3f0);border-col
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox2" id="lb2" onclick="closeLb2()">
+<div class="lightbox2" id="lb2">
+  <span class="lb2-count" id="lb2Count"></span>
+  <button class="lb2-arrow lb2-prev" onclick="event.stopPropagation();lbNav(-1)" aria-label="Anterior">‹</button>
+  <button class="lb2-arrow lb2-next" onclick="event.stopPropagation();lbNav(1)" aria-label="Siguiente">›</button>
   <button class="ov-close" onclick="closeLb2()" aria-label="Cerrar" style="position:absolute">✕</button>
-  <div class="lb2-inner" id="lb2Inner"></div>
+  <div class="lb2-inner" id="lb2Inner" onclick="event.stopPropagation()"></div>
 </div>
 
 <a id="wa" href="https://wa.me/56988461783?text=Hola%2C%20vengo%20de%20la%20web%20de%20IMPM%20Chile%20%F0%9F%99%8F" target="_blank" aria-label="WhatsApp">
@@ -838,43 +849,92 @@ function setTheme(dia){
 }
 themeToggle.addEventListener('click',()=>setTheme(!document.body.classList.contains('dia')));
 setTheme(localStorage.getItem('impm-theme')==='dia');
-/* ═══ V2.0 — Galerías por ministerio (10 fotos c/u, prefijo.nnn.jpg) ═══ */
+/* ═══ V2.1 — Galerías: fotos limpias con sombra, navegación y cierre táctil ═══ */
 const GALERIAS={
- alabanza:{titulo:'Alabanza',sub:'Momentos de adoración y música',prefijo:'ala',emoji:'🎶'},
- infantil:{titulo:'Ministerio Infantil',sub:'Los pequeños de la casa de Dios',prefijo:'inf',emoji:'🧒'},
- misiones:{titulo:'Misiones',sub:'Llevando el Evangelio a otras naciones',prefijo:'mis',emoji:'🌍'},
- visitacion:{titulo:'Visitación',sub:'Presencia donde más se necesita',prefijo:'vis',emoji:'🤝'},
- estudio:{titulo:'Estudio Bíblico',sub:'Creciendo en la Palabra',prefijo:'est',emoji:'📚'},
- ayuda:{titulo:'Ayuda Social',sub:'Apoyo real para nuestra comuna',prefijo:'ayu',emoji:'🍞'}
+ alabanza:{titulo:'Alabanza',sub:'Momentos de adoración y música',prefijo:'ala'},
+ infantil:{titulo:'Ministerio Infantil',sub:'Los pequeños de la casa de Dios',prefijo:'inf'},
+ misiones:{titulo:'Misiones',sub:'Llevando el Evangelio a otras naciones',prefijo:'mis'},
+ visitacion:{titulo:'Visitación',sub:'Presencia donde más se necesita',prefijo:'vis'},
+ estudio:{titulo:'Estudio Bíblico',sub:'Creciendo en la Palabra',prefijo:'est'},
+ ayuda:{titulo:'Ayuda Social',sub:'Apoyo real para nuestra comuna',prefijo:'ayu'}
 };
+let galFotos=[],galIdx=0;
+
 function openGal(key){
  const g=GALERIAS[key];if(!g)return;
  document.getElementById('galTitulo').textContent=g.titulo;
  document.getElementById('galSub').textContent=g.sub;
  const grid=document.getElementById('galGrid');grid.innerHTML='';
+ galFotos=[];galIdx=0;
+ let cargadas=[];
  for(let i=1;i<=10;i++){
   const n=String(i).padStart(3,'0');
-  const d=document.createElement('div');d.className='gal-item';
-  const img=document.createElement('img');
-  img.src=g.prefijo+'.'+n+'.jpg';img.alt=g.titulo+' — foto '+n;img.loading='lazy';
-  img.onerror=function(){d.classList.add('ph-empty');this.remove()};
-  d.appendChild(img);
-  const tag=document.createElement('span');tag.className='ph-tag';tag.textContent=g.emoji;
-  d.appendChild(tag);
-  d.onclick=function(){
-    const im=this.querySelector('img');
-    if(!im)return;
-    const lb=document.getElementById('lb2Inner');lb.innerHTML='';
-    const big=document.createElement('img');big.src=im.src;big.alt=im.alt;
-    lb.appendChild(big);document.getElementById('lb2').classList.add('open');
-  };
-  grid.appendChild(d);
+  const src=g.prefijo+'.'+n+'.jpg';
+  const probe=new Image();
+  probe.onload=(function(idx,url){
+    return function(){
+      cargadas.push({i:idx,url:url});
+      cargadas.sort((a,b)=>a.i-b.i);
+      galFotos=cargadas.map(c=>c.url);
+      grid.innerHTML='';
+      galFotos.forEach((u,k)=>{
+        const d=document.createElement('div');d.className='gal-item';
+        const im=document.createElement('img');im.src=u;im.alt=g.titulo+' — foto '+(k+1);im.loading='lazy';
+        d.appendChild(im);
+        d.onclick=()=>openLb2(k);
+        grid.appendChild(d);
+      });
+    };
+  })(i,src);
+  probe.onerror=function(){};
+  probe.src=src;
  }
- document.getElementById('ovGal').classList.add('open');document.body.style.overflow='hidden';
+ document.getElementById('ovGal').classList.add('open');
+ document.body.style.overflow='hidden';
 }
 function closeGal(){document.getElementById('ovGal').classList.remove('open');document.body.style.overflow=''}
+
+/* cerrar tocando el fondo (fuera del contenido) */
+document.getElementById('ovGal').addEventListener('click',e=>{if(e.target===document.getElementById('ovGal'))closeGal()});
+
+/* ═══ LIGHTBOX con flechas + swipe + contador ═══ */
+function openLb2(k){
+ galIdx=k;lbShow();
+ document.getElementById('lb2').classList.add('open');
+}
+function lbShow(){
+ const lb=document.getElementById('lb2Inner');lb.innerHTML='';
+ const big=document.createElement('img');big.src=galFotos[galIdx];
+ big.onerror=function(){lbNav(1)};
+ lb.appendChild(big);
+ document.getElementById('lb2Count').textContent=(galIdx+1)+' / '+galFotos.length;
+}
+function lbNav(dir){
+ if(!galFotos.length)return;
+ galIdx=(galIdx+dir+galFotos.length)%galFotos.length;
+ lbShow();
+}
 function closeLb2(){document.getElementById('lb2').classList.remove('open')}
-addEventListener('keydown',e=>{if(e.key==='Escape'){closeGal();closeLb2()}});
+
+/* flechas del teclado */
+addEventListener('keydown',e=>{
+ if(!document.getElementById('lb2').classList.contains('open'))return;
+ if(e.key==='ArrowLeft')lbNav(-1);
+ if(e.key==='ArrowRight')lbNav(1);
+ if(e.key==='Escape'){closeLb2();closeGal()}
+});
+
+/* cerrar lightbox tocando el fondo */
+document.getElementById('lb2').addEventListener('click',e=>{if(e.target===document.getElementById('lb2'))closeLb2()});
+
+/* swipe táctil (móvil) */
+let touchX=null;
+document.getElementById('lb2').addEventListener('touchstart',e=>{touchX=e.touches[0].clientX},{passive:true});
+document.getElementById('lb2').addEventListener('touchend',e=>{
+ if(touchX===null)return;
+ const dx=e.changedTouches[0].clientX-touchX;touchX=null;
+ if(Math.abs(dx)>50)lbNav(dx<0?1:-1);
+},{passive:true});
 
 /* ===== VOLVER ARRIBA ===== */
 const toTop=document.getElementById('toTop');
