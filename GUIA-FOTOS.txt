@@ -1,3 +1,5 @@
+las fotos de galería se guardan en el teléfono de cada visitante. Si algún día reemplazas una foto conservando el mismo nombre, quien ya la vio puede seguir viendo la antigua. Para evitarlo, usa un nombre nuevo o cambia impm-v2 por impm-v3 en sw.js.
+
 GUÍA DE IMÁGENES — IMPM CHILE v2.0
 ═══════════════════════════════════════════
 

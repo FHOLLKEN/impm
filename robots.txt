@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://fhollken.github.io/impm/sitemap.xml
+Sitemap: https://impmchile.cl/sitemap.xml
