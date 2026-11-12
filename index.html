@@ -558,6 +558,7 @@ body.dia .gal-item:hover{box-shadow:0 16px 40px rgba(18,58,92,.3)}
 </style>
 </head>
 <body>
+<audio id="bgm" src="MusicaIMPM.mp3" loop preload="auto" style="display:none"></audio>
 <script>if(localStorage.getItem('impm-theme')==='dia')document.body.classList.add('dia');</script>
 
 <!-- BOTÓN DÍA/NOCHE -->
@@ -943,6 +944,45 @@ toTop.addEventListener('click',()=>smoothTo(0));
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
+</script>
+<script>
+/* ===== MÚSICA DE FONDO ===== */
+(function(){
+  var a=document.getElementById('bgm');
+  if(!a)return;
+  var VOL=0.35, started=false, fadeT=null;
+  a.volume=0;
+  function fadeIn(){
+    clearInterval(fadeT);
+    fadeT=setInterval(function(){
+      a.volume=Math.min(VOL,a.volume+0.02);
+      if(a.volume>=VOL)clearInterval(fadeT);
+    },80);
+  }
+  function stopListening(){
+    ['pointerdown','touchend','click','keydown','wheel','scroll'].forEach(function(ev){
+      removeEventListener(ev,tryPlay,true);
+    });
+  }
+  function tryPlay(){
+    if(started)return;
+    var p=a.play();
+    if(p&&p.then){
+      p.then(function(){started=true;fadeIn();stopListening();}).catch(function(){});
+    }else{started=true;fadeIn();stopListening();}
+  }
+  /* intenta de inmediato (funciona si el navegador lo permite) y, si no, al primer gesto */
+  tryPlay();
+  ['pointerdown','touchend','click','keydown','wheel','scroll'].forEach(function(ev){
+    addEventListener(ev,tryPlay,{capture:true,passive:true});
+  });
+  /* pausa al cambiar de pestaña y reanuda al volver */
+  document.addEventListener('visibilitychange',function(){
+    if(!started)return;
+    if(document.hidden)a.pause();
+    else a.play().catch(function(){});
+  });
+})();
 </script>
 </body>
 </html>
